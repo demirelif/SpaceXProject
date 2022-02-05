@@ -3,13 +3,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Launchpad {
-    String launch_attempts;
+    int launch_attempts;
     String name;
     String full_name;
 
-    public String getFull_name(){
-        return full_name;
-    }
     public String getName() {
         return name;
     }
@@ -18,15 +15,19 @@ public class Launchpad {
         this.name = name;
     }
 
-
-
-    public String getLaunchAttempts() {
+    public int getLaunch_attempts() {
         return launch_attempts;
     }
 
-    public void setLaunchAttempts(String launchAttempts) {
-        this.launch_attempts = launchAttempts;
+    public void setLaunch_attempts(int launch_attempts) {
+        this.launch_attempts = launch_attempts;
     }
+
+    public void setFull_name(String full_name) {
+        this.full_name = full_name;
+    }
+
+
 
 
 

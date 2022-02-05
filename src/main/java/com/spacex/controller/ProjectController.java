@@ -8,9 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
@@ -27,6 +25,7 @@ import java.util.logging.Logger;
  * @author  Elif
  * @version 1.0
  */
+@CrossOrigin(origins = "http://localhost:3000",allowedHeaders = "*")
 @RestController
 public class ProjectController {
     private final com.spacex.controller.RestController controller;
@@ -35,9 +34,7 @@ public class ProjectController {
     }
 
     @GetMapping("/total-people-in-space")
-    //public JsonNode getCrew() throws JsonProcessingException {
     public JsonNode getTotalPeople() throws JsonProcessingException, JSONException {
-        //return controller.getTotalPeople();
         return controller.getTotalPeople();
     }
 
@@ -62,9 +59,11 @@ public class ProjectController {
         return controller.getTotalTime();
     }
 
-    @GetMapping("/total-launches")
-    public JsonNode getTotalLaunches(String id) throws JSONException, JsonProcessingException {
-        return controller.getTotalLaunches(id);
+
+    @GetMapping("/total-number-of-launches-from-launchpad")
+    public JsonNode getTotalNumberOfLaunchesFromLaunchpad(String id) throws JSONException, JsonProcessingException {
+       // String idx = "5eb87cdaffd86e000604b32b";
+        return controller.getTotalNumberOfLaunchesFromLaunchpad(id);
     }
 
     @GetMapping("/company-info")
@@ -72,7 +71,29 @@ public class ProjectController {
         return controller.getCompanyInfo();
     }
 
+    @GetMapping("/no-of-successful-launches")
+    public JsonNode getNoOfSuccessfulLaunches() throws IOException, JSONException {
+        return controller.getNoOfSuccessfulLaunches();
+    }
+    @GetMapping("/no-of-unsuccessful-launches")
+    public JsonNode getNoOfUnsuccessfulLaunches() throws IOException, JSONException {
+        return controller.getNoOfUnsuccessfulLaunches();
+    }
 
+    @GetMapping("/next-launch")
+    public JsonNode getNextLaunch() throws JsonProcessingException, JSONException {
+        return controller.getNextLaunch();
+    }
+
+    @GetMapping("/latest-launch")
+    public JsonNode getLatestLaunch() throws JsonProcessingException, JSONException {
+        return controller.getLatestLaunch();
+    }
+
+    @GetMapping("/average-mass-of-rockets")
+    public JsonNode getAverageMassOfRockets() throws JsonProcessingException, JSONException {
+        return controller.getAverageMassOfRockets();
+    }
 
 
 }

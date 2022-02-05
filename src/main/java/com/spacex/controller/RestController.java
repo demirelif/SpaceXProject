@@ -66,6 +66,36 @@ public class RestController {
         return launches;
     }
 
+    public JsonNode getNoOfUnsuccessfulLaunches() throws IOException, JSONException {
+        restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.getForEntity(url + "/v4/launches", String.class);
+        JSONArray jsonArray = new JSONArray(response.getBody());
+        int launchCounter = 0;
+        for (int i = 0; i < jsonArray.length(); i++) {
+            if (jsonArray.getJSONObject(i).getString("success").equals("false")) {
+                launchCounter++;
+            }
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = mapper.readTree(String.valueOf(launchCounter));
+        return root;
+    }
+
+    public JsonNode getNoOfSuccessfulLaunches() throws IOException, JSONException {
+        restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.getForEntity(url + "/v4/launches", String.class);
+        JSONArray jsonArray = new JSONArray(response.getBody());
+        int launchCounter = 0;
+        for (int i = 0; i < jsonArray.length(); i++) {
+            if (jsonArray.getJSONObject(i).getString("success").equals("true")) {
+                launchCounter++;
+            }
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = mapper.readTree(String.valueOf(launchCounter));
+        return root;
+    }
+
     public JsonNode getTotalPeople() throws JsonProcessingException, JSONException {
         restTemplate = new RestTemplate();
         ResponseEntity<String> response = restTemplate.getForEntity(url + "/v4/crew", String.class);
@@ -92,16 +122,20 @@ public class RestController {
         return root;
     }
 
-    public JsonNode getTotalLaunches(@RequestParam String id) throws JSONException, JsonProcessingException {
+    public JsonNode getTotalNumberOfLaunchesFromLaunchpad(@RequestParam String id) throws JSONException, JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         restTemplate = new RestTemplate();
         String requestUrl = url + "/v4/launchpads/{id}";
+       // String requestUrl = url + "/v4/launches/{id}";
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
         String urlTemplate = UriComponentsBuilder.fromUriString(requestUrl).buildAndExpand(params).toUriString();
+        System.out.println(urlTemplate);
         HttpEntity<String> response = restTemplate.getForEntity(urlTemplate, String.class);
         Launchpad launchpad = objectMapper.readValue(response.getBody(), Launchpad.class);
-        return objectMapper.readTree(String.valueOf(launchpad.getLaunchAttempts()));
+        System.out.println(response);
+        System.out.println(launchpad.getLaunch_attempts());
+        return objectMapper.readTree(String.valueOf(launchpad.getLaunch_attempts()));
     }
 
     public JsonNode getCompanyInfo() throws JSONException, JsonProcessingException {
@@ -109,6 +143,36 @@ public class RestController {
         ResponseEntity<String> response = restTemplate.getForEntity(url + "/v4/company", String.class);
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(response.getBody());
+        return root;
+    }
+
+    public JsonNode getNextLaunch() throws JsonProcessingException {
+        restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.getForEntity(url + "/v4/launches/next", String.class);
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = mapper.readTree(response.getBody());
+        return root;
+    }
+
+    public JsonNode getLatestLaunch() throws JsonProcessingException {
+        restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.getForEntity(url + "/v4/launches/latest", String.class);
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = mapper.readTree(response.getBody());
+        return root;
+    }
+
+    public JsonNode getAverageMassOfRockets() throws JsonProcessingException, JSONException {
+        restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.getForEntity(url + "/v4/rockets", String.class);
+        JSONArray jsonArray = new JSONArray(response.getBody());
+        long totalMass = 0;
+        int noOfRockets = jsonArray.length();
+        for (int i = 0; i < jsonArray.length(); i++) {
+            totalMass += Integer.parseInt(jsonArray.getJSONObject(i).getJSONObject("mass").getString("kg"));
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = mapper.readTree(String.valueOf(totalMass/noOfRockets));
         return root;
     }
 }

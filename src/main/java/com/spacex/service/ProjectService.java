@@ -38,8 +38,8 @@ public class ProjectService {
      * This method calculates the total number of launches
      * from the given launchpad.
      */
-    public int calculateTotalLaunces(Launchpad launchpad){
-        return Integer.parseInt(launchpad.getLaunchAttempts());
+    public int calculateTotalLaunches(Launchpad launchpad){
+        return launchpad.getLaunch_attempts();
     }
 
     /**
