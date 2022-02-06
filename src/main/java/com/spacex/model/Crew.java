@@ -3,13 +3,19 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Crew {
-    private String name;
-    private String agency;
+   // private String name;
+   // private String agency;
     private String[] launches;
-    private Status status;
-    private String id;
+ //   private String id;
 
+    public String[] getLaunches() {
+        return launches;
+    }
+    public void setLaunches(String[] launches) {
+        this.launches = launches;
+    }
 
+/*
     public String getName() {
         return name;
     }
@@ -24,14 +30,6 @@ public class Crew {
 
     public void setAgency(String agency) {
         this.agency = agency;
-    }
-
-    public String[] getLaunches() {
-        return launches;
-    }
-
-    public void setLaunches(String[] launches) {
-        this.launches = launches;
     }
 
     public Status getStatus() {
@@ -53,6 +51,8 @@ public class Crew {
     public int getNumberOfLaunches(){
         return getLaunches().length;
     }
+
+ */
 
 
 }

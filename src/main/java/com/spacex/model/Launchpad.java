@@ -8,18 +8,11 @@ public class Launchpad {
     String full_name;
     String id;
 
-    public String getId() {
-        return id;
-    }
+
 
     public void setId(String id) {
         this.id = id;
     }
-
-    public String getName() {
-        return name;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
@@ -28,6 +21,15 @@ public class Launchpad {
         return launch_attempts;
     }
 
+
+    public String getName() {
+        return name;
+    }
+    public String getId() {
+        return id;
+    }
+
+
     public void setLaunch_attempts(int launch_attempts) {
         this.launch_attempts = launch_attempts;
     }
@@ -35,6 +37,8 @@ public class Launchpad {
     public void setFull_name(String full_name) {
         this.full_name = full_name;
     }
+
+
 
 
 

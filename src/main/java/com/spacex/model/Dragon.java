@@ -14,6 +14,15 @@ public class Dragon {
     private String devPartner;
     private String id;
 
+    public DragonType getDragonType(){
+        return dragonType;
+    }
+    public int getOrbitDuration() {
+        return orbitDuration;
+    }
+
+    /*
+
     public String getName() {
         return name;
     }
@@ -34,9 +43,7 @@ public class Dragon {
         this.dragonType = dragonType;
     }
 
-    public DragonType getDragonType(){
-        return dragonType;
-    }
+
 
     public Date getFirstFlight() {
         return firstFlight;
@@ -46,9 +53,7 @@ public class Dragon {
         this.firstFlight = firstFlight;
     }
 
-    public int getOrbitDuration() {
-        return orbitDuration;
-    }
+
 
     public void setOrbitDuration(int orbitDuration) {
         this.orbitDuration = orbitDuration;
@@ -69,4 +74,6 @@ public class Dragon {
     public void setId(String id) {
         this.id = id;
     }
+
+     */
 }

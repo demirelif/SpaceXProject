@@ -29,15 +29,15 @@ public class ProjectApplication {
 
     public static void main(String[] args) throws IOException, JSONException {
         SpringApplication.run(ProjectApplication.class, args);
-        RestController restController = new RestController();
+        //RestController restController = new RestController();
         //projectController = new ProjectController();
 
         //List<Object> list = restController.getCrew();
         //JsonNode node = restController.getCrew("5ebf1b7323a9a60006e03a7b");
         //restController.getSuccessfulLaunches();
-        restController.getTotalNumberOfLaunchesFromLaunchpad("5e9e4501f509094ba4566f84");
+       // restController.getTotalNumberOfLaunchesFromLaunchpad("5e9e4501f509094ba4566f84");
         //restController.getAverageMassOfRockets();
-        restController.getLaunchpads();
+        //restController.getLaunchpads();
     }
 
 }
