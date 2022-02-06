@@ -1,12 +1,10 @@
 package com.spacex;
 
-import org.json.JSONException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
 /**
  * The main class of the application.
  *
@@ -21,7 +19,7 @@ public class ProjectApplication {
         return new RestTemplate();
     }
 
-    public static void main(String[] args) throws IOException, JSONException {
+    public static void main(String[] args) {
         SpringApplication.run(ProjectApplication.class, args);
     }
 
