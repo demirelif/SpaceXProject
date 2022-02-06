@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 import java.util.List;
+
 /**
  * This class communicate with the localhost and
  * implements REST-API requirements.
@@ -15,6 +16,7 @@ import java.util.List;
  * @author  Elif
  * @version 1.0
  */
+
 @CrossOrigin(origins = "http://localhost:3000",allowedHeaders = "*")
 @RestController
 public class ProjectController {
@@ -72,41 +74,4 @@ public class ProjectController {
     public JsonNode getNextLaunch() throws JsonProcessingException, JSONException {
         return controller.getNextLaunch();
     }
-
-    /*
-    @GetMapping("/successful")
-    public List<Launch> getSuccessfulLaunches() throws IOException, JSONException {
-        return controller.getSuccessfulLaunches();
-    }
-
-
-    // ------------------
-
-
-
-    @GetMapping("/crew")
-    //public JsonNode getCrew() throws JsonProcessingException {
-    public JsonNode getCrew() throws JsonProcessingException {
-        return controller.getCrew();
-    }
-
-    @GetMapping("/find-crew")
-    public JsonNode getCrew(@RequestParam String id ) throws JsonProcessingException {
-        return controller.getCrew(id);
-    }
-
-    @GetMapping("/launchpadNames")
-    public List<String> getLaunchpadNames() throws JsonProcessingException, JSONException {
-        return controller.getLaunchpadNames();
-    }
-
-    @GetMapping("/launch-patch")
-    public JsonNode getLaunchPatch() throws JsonProcessingException, JSONException {
-        return controller.getLaunchPatch();
-    }
-
-     */
-
-
-
 }
