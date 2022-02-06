@@ -3,17 +3,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Launch {
-    private String staticFireDateUtc;
-    private String staticFireDateUnix;
-    private boolean net;
-    private int window;
-    private String rocket;
     private boolean success;
     private String failures;
     private String details;
-    //private Crew[] crew;
-   // private String[] ships;
-    //private String[] capsules;
+    private Crew[] crew;
+    private String[] ships;
+    private String[] capsules;
     private String launchpad;
     private String flightNumber;
     private String name;
@@ -22,53 +17,19 @@ public class Launch {
     private String dateLocal;
     private String datePrecision;
     private boolean upcoming;
-    //private String[] cores;
+    private String[] cores;
     private boolean autoUpdate;
     private boolean tbd;
     private String launchLibraryId;
     private String id;
+    private String url;
 
-
-    public String getStaticFireDateUtc() {
-        return staticFireDateUtc;
+    public String getUrl(){
+        return url;
     }
-
-    public void setStaticFireDateUtc(String staticFireDateUtc) {
-        this.staticFireDateUtc = staticFireDateUtc;
+    public void setUrl(String url){
+        this.url = url;
     }
-
-    public String getStaticFireDateUnix() {
-        return staticFireDateUnix;
-    }
-
-    public void setStaticFireDateUnix(String staticFireDateUnix) {
-        this.staticFireDateUnix = staticFireDateUnix;
-    }
-
-    public boolean isNet() {
-        return net;
-    }
-
-    public void setNet(boolean net) {
-        this.net = net;
-    }
-
-    public int getWindow() {
-        return window;
-    }
-
-    public void setWindow(int window) {
-        this.window = window;
-    }
-
-    public String getRocket() {
-        return rocket;
-    }
-
-    public void setRocket(String rocket) {
-        this.rocket = rocket;
-    }
-
     public boolean isSucceed() {
         return success == true;
     }
@@ -91,6 +52,30 @@ public class Launch {
 
     public void setDetails(String details) {
         this.details = details;
+    }
+
+    public Crew[] getCrew() {
+        return crew;
+    }
+
+    public void setCrew(Crew[] crew) {
+        this.crew = crew;
+    }
+
+    public String[] getShips() {
+        return ships;
+    }
+
+    public void setShips(String[] ships) {
+        this.ships = ships;
+    }
+
+    public String[] getCapsules() {
+        return capsules;
+    }
+
+    public void setCapsules(String[] capsules) {
+        this.capsules = capsules;
     }
 
 
@@ -156,6 +141,14 @@ public class Launch {
 
     public void setUpcoming(boolean upcoming) {
         this.upcoming = upcoming;
+    }
+
+    public String[] getCores() {
+        return cores;
+    }
+
+    public void setCores(String[] cores) {
+        this.cores = cores;
     }
 
     public boolean isAutoUpdate() {

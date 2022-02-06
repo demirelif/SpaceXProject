@@ -7,6 +7,7 @@ import com.spacex.model.*;
 import com.spacex.service.ProjectService;
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.*;
 
 /**
@@ -48,6 +50,20 @@ public class RestController {
         HttpEntity<String> response = restTemplate.getForEntity(urlTemplate, String.class);
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(response.getBody());
+        return root;
+    }
+
+    public JsonNode getLaunchDetails(@RequestParam String id) throws JsonProcessingException, JSONException {
+        restTemplate = new RestTemplate();
+        String requestUrl = url + "/v4/launches/{id}";
+        Map<String, String> params = new HashMap<>();
+        params.put("id", id);
+        String urlTemplate = UriComponentsBuilder.fromUriString(requestUrl).buildAndExpand(params).toUriString();
+        HttpEntity<String> response = restTemplate.getForEntity(urlTemplate, String.class);
+        JSONObject jsonObject = new JSONObject(response.getBody());
+        String url = jsonObject.getString("details");
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = mapper.readTree(url);
         return root;
     }
 
@@ -126,7 +142,7 @@ public class RestController {
         ObjectMapper objectMapper = new ObjectMapper();
         restTemplate = new RestTemplate();
         String requestUrl = url + "/v4/launchpads/{id}";
-       // String requestUrl = url + "/v4/launches/{id}";
+        //String requestUrl = url + "/v4/launches/{id}";
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
         String urlTemplate = UriComponentsBuilder.fromUriString(requestUrl).buildAndExpand(params).toUriString();
@@ -173,6 +189,61 @@ public class RestController {
         }
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root = mapper.readTree(String.valueOf(totalMass/noOfRockets));
+        return root;
+    }
+
+    public List<String> getLaunchpadNames() throws JsonProcessingException, JSONException {
+        restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.getForEntity(url + "/v4/launchpads", String.class);
+        JSONArray jsonArray = new JSONArray(response.getBody());
+       // ArrayList<Launchpad> launchpads = new ArrayList<>();
+        ArrayList<String> launchpads = new ArrayList<>();
+
+        for (int i = 0; i < jsonArray.length(); i++) {
+            String launchpad = jsonArray.getJSONObject(i).getString("name");
+         //   Launchpad launchpad = new Launchpad();
+         //   launchpad.setName(jsonArray.getJSONObject(i).getString("name"));
+            launchpads.add(launchpad);
+            System.out.println("launchpad : " + launchpad );
+        }
+        return launchpads;
+    }
+
+    public List<Launchpad> getLaunchpads() throws JsonProcessingException, JSONException {
+        restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.getForEntity(url + "/v4/launchpads", String.class);
+        JSONArray jsonArray = new JSONArray(response.getBody());
+        ArrayList<Launchpad> launchpads = new ArrayList<>();
+        for (int i = 0; i < jsonArray.length(); i++) {
+               Launchpad launchpad = new Launchpad();
+               launchpad.setName(jsonArray.getJSONObject(i).getString("name"));
+            launchpad.setId(jsonArray.getJSONObject(i).getString("id"));
+            launchpads.add(launchpad);
+        }
+        return launchpads;
+    }
+
+    public List<Launch> getLaunchList() throws JsonProcessingException, JSONException {
+        restTemplate = new RestTemplate();
+        ResponseEntity<String> response = restTemplate.getForEntity(url + "/v4/launches", String.class);
+        JSONArray jsonArray = new JSONArray(response.getBody());
+        ArrayList<Launch> launches = new ArrayList<>();
+        int i = 0; // additional counter to decrease the data size for visual reasons
+        while ( i < 5 ){
+            Launch launch = new Launch();
+            launch.setId(jsonArray.getJSONObject(i).getString("id"));
+            launch.setUrl(jsonArray.getJSONObject(i).getJSONObject("links").getJSONObject("patch").getString("small"));
+            launch.setName(jsonArray.getJSONObject(i).getString("name"));
+            launches.add(launch);
+            i++;
+        }
+        return launches;
+    }
+
+    public JsonNode getLaunchPatch() throws JsonProcessingException {
+        String url = "";
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode root = mapper.readTree(String.valueOf(url));
         return root;
     }
 }

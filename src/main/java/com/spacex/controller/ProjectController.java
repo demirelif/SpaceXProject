@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spacex.model.Launch;
+import com.spacex.model.Launchpad;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.slf4j.LoggerFactory;
@@ -61,8 +62,9 @@ public class ProjectController {
 
 
     @GetMapping("/total-number-of-launches-from-launchpad")
-    public JsonNode getTotalNumberOfLaunchesFromLaunchpad(String id) throws JSONException, JsonProcessingException {
+    public JsonNode getTotalNumberOfLaunchesFromLaunchpad(@RequestParam String id) throws JSONException, JsonProcessingException {
        // String idx = "5eb87cdaffd86e000604b32b";
+
         return controller.getTotalNumberOfLaunchesFromLaunchpad(id);
     }
 
@@ -95,5 +97,19 @@ public class ProjectController {
         return controller.getAverageMassOfRockets();
     }
 
+    @GetMapping("/launchpadNames")
+    public List<String> getLaunchpadNames() throws JsonProcessingException, JSONException {
+        return controller.getLaunchpadNames();
+    }
+
+    @GetMapping("/launch-patch")
+    public JsonNode getLaunchPatch() throws JsonProcessingException, JSONException {
+        return controller.getLaunchPatch();
+    }
+
+    @GetMapping("/launchpads")
+    public List<Launchpad> getLaunchpads() throws JsonProcessingException, JSONException {
+        return controller.getLaunchpads();
+    }
 
 }

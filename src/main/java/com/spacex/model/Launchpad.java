@@ -6,6 +6,15 @@ public class Launchpad {
     int launch_attempts;
     String name;
     String full_name;
+    String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;

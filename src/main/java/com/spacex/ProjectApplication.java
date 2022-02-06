@@ -35,8 +35,9 @@ public class ProjectApplication {
         //List<Object> list = restController.getCrew();
         //JsonNode node = restController.getCrew("5ebf1b7323a9a60006e03a7b");
         //restController.getSuccessfulLaunches();
-       // restController.getTotalLaunches("5eb87cdaffd86e000604b32b");
+        restController.getTotalNumberOfLaunchesFromLaunchpad("5e9e4501f509094ba4566f84");
         //restController.getAverageMassOfRockets();
+        restController.getLaunchpads();
     }
 
 }
