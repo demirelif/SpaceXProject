@@ -10,7 +10,7 @@ mvn spring-boot:run
 ```
 The spring boot will be started at localhost:8080
 
-The source code can be found [at](https://github.com/demirelif/SpaceXUI/).
+The source code for the user interface can be found [at](https://github.com/demirelif/SpaceXUI/).
 
 To run the front-end
 ```
