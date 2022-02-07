@@ -24,7 +24,6 @@ import java.util.*;
 
 @org.springframework.web.bind.annotation.RestController
 public class RestController {
-    // @Autowired
     private RestTemplate restTemplate;
     final static String url = "https://api.spacexdata.com";
 
@@ -162,15 +161,11 @@ public class RestController {
         ObjectMapper objectMapper = new ObjectMapper();
         restTemplate = new RestTemplate();
         String requestUrl = url + "/v4/launchpads/{id}";
-        //String requestUrl = url + "/v4/launches/{id}";
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
         String urlTemplate = UriComponentsBuilder.fromUriString(requestUrl).buildAndExpand(params).toUriString();
-        System.out.println(urlTemplate);
         HttpEntity<String> response = restTemplate.getForEntity(urlTemplate, String.class);
         Launchpad launchpad = objectMapper.readValue(response.getBody(), Launchpad.class);
-        System.out.println(response);
-        System.out.println(launchpad.getLaunch_attempts());
         return objectMapper.readTree(String.valueOf(launchpad.getLaunch_attempts()));
     }
 
