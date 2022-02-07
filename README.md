@@ -17,4 +17,4 @@ To run the front-end
 npm install
 npm start 
 ```
-Now you can see the program running at localhost:3000
+The back-end checks the port the request comes from; therefore, the front-end will only be able to fetch the response from back-end by localhost:3000
